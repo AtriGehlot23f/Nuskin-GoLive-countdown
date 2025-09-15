@@ -5,10 +5,10 @@ import pytz
 
 app = Flask(__name__)
 
-# Use Mountain Time (Salt Lake City, Utah)
+# Use Mountain Time (Salt Lake City)
 MT = pytz.timezone('America/Denver')
 
-# Localize Go Live date to Mountain Time
+# Localize go-live date to Mountain Time
 GO_LIVE_DATE = MT.localize(datetime(2025, 11, 14, 0, 0, 0))
 
 @app.route('/')
@@ -21,20 +21,22 @@ def countdown():
     minutes = (seconds % 3600) // 60
     secs = seconds % 60
 
-    # Load HTML template from root folder index.html
+    # Zero pad hours, minutes, and seconds before passing to template
+    hours_str = f"{hours:02d}"
+    minutes_str = f"{minutes:02d}"
+    seconds_str = f"{secs:02d}"
+
     with open('index.html', 'r') as f:
         html_template = f.read()
 
-    # Render template with countdown values
     return render_template_string(
         html_template,
         days=days,
-        hours=hours,
-        minutes=minutes,
-        seconds=secs
+        hours=hours_str,
+        minutes=minutes_str,
+        seconds=seconds_str
     )
 
-# Serve logo image from root folder
 @app.route('/Nu-Skin-Logo.png')
 def logo():
     return send_from_directory(os.getcwd(), 'Nu-Skin-Logo.png')
