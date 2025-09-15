@@ -15,24 +15,28 @@
             width: 150px;
         }
         h1 {
-            font-size: 24px;
+            font-size: 32px;
             margin-bottom: 10px;
+            font-weight: bold;
         }
         .countdown {
-            font-size: 48px;
-            margin-top: 20px;
+            font-size: 56px;
+            margin-top: 30px;
             color: #007ba7;
+        }
+        .timer-label {
+            font-size: 22px;
+            margin-top: 18px;
+            margin-bottom: 8px;
         }
     </style>
 </head>
 <body>
     <img src="/nuskin_logo.png" alt="Nuskin Logo" />
     <h1>India MVP-1 Business Go Live - 14-Nov-2025</h1>
-    <div>Day remaining: <span id="days">T-{{ days }}</span></div>
-    <div class="countdown" id="timer">{{ hours }}:{{ minutes }}:{{ seconds }}</div>
-
+    <div class="timer-label">Day remaining: T-{{ days }}</div>
+    <div class="countdown" id="timer">{{ days }}d {{ hours }}:{{ minutes }}:{{ seconds }}</div>
     <script>
-        // Initialize timer values from server-rendered content
         let daysRemaining = {{ days }};
         let hours = {{ hours }};
         let minutes = {{ minutes }};
@@ -58,22 +62,20 @@
                             seconds = 59;
                         } else {
                             // Countdown complete
-                            document.getElementById('days').textContent = "Go Live Complete!";
-                            document.getElementById('timer').textContent = "00:00:00";
+                            document.getElementById('timer').textContent = "Go Live Complete!";
                             clearInterval(timerInterval);
                             return;
                         }
                     }
                 }
             }
-            document.getElementById('days').textContent = "T-" + daysRemaining;
-            document.getElementById('timer').textContent = 
-                String(hours).padStart(2, '0') + ":" + 
-                String(minutes).padStart(2, '0') + ":" + 
+            document.getElementById('timer').textContent =
+                daysRemaining + "d " +
+                String(hours).padStart(2, '0') + ":" +
+                String(minutes).padStart(2, '0') + ":" +
                 String(seconds).padStart(2, '0');
         }
 
-        // Update timer every second
         const timerInterval = setInterval(updateTimer, 1000);
     </script>
 </body>
