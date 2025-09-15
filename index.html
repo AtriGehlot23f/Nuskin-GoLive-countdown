@@ -11,12 +11,11 @@
     </style>
 </head>
 <body>
-    <img src="{{ url_for('static', filename='nuskin_logo.png') }}" alt="Nuskin Logo" />
+    <img src="/nuskin_logo.png" alt="Nuskin Logo" />
     <h1>India MVP-1 Business Go Live - 14-Nov-2025</h1>
     <div>Day remaining: T-{{ days }}</div>
     <div class="countdown">{{ hours }}:{{ minutes }}:{{ seconds }}</div>
     <script>
-        // Auto refresh every second to update the timer
         setTimeout(() => location.reload(), 1000);
     </script>
 </body>
