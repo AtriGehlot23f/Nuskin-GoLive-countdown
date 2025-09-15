@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>India MVP-1 Business Go Live Countdown</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        img { width: 150px; }
+        h1 { font-size: 24px; margin-bottom: 10px; }
+        .countdown { font-size: 48px; margin-top: 20px; color: #007ba7; }
+    </style>
+</head>
+<body>
+    <img src="{{ url_for('static', filename='nuskin_logo.png') }}" alt="Nuskin Logo" />
+    <h1>India MVP-1 Business Go Live - 14-Nov-2025</h1>
+    <div>Day remaining: T-{{ days }}</div>
+    <div class="countdown">{{ hours }}:{{ minutes }}:{{ seconds }}</div>
+    <script>
+        // Auto refresh every second to update the timer
+        setTimeout(() => location.reload(), 1000);
+    </script>
+</body>
+</html>
