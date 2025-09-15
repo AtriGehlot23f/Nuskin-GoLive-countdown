@@ -3,7 +3,7 @@ from datetime import datetime
 from PIL import Image, ImageTk
 
 # Path to Nuskin logo. Update the filename if you rename the image.
-logo_path = "nuskin_logo.jpg"
+logo_path = "nuskin_logo.png"
 target_time = datetime(2025, 11, 14, 0, 0, 0)  # Go Live date
 
 def update_timer():
