@@ -5,7 +5,7 @@ import pytz
 
 app = Flask(__name__)
 
-# Use Mountain Time (Utah, Salt Lake City)
+# Use Mountain Time (Salt Lake City, Utah)
 MT = pytz.timezone('America/Denver')
 
 # Localize Go Live date to Mountain Time
@@ -29,15 +29,15 @@ def countdown():
     return render_template_string(
         html_template,
         days=days,
-        hours=f"{hours:02d}",
-        minutes=f"{minutes:02d}",
-        seconds=f"{secs:02d}"
+        hours=hours,
+        minutes=minutes,
+        seconds=secs
     )
 
-# Serve logo from root folder
-@app.route('/nuskin_logo.png')
+# Serve logo image from root folder
+@app.route('/Nu-Skin-Logo.png')
 def logo():
-    return send_from_directory(os.getcwd(), 'nuskin_logo.png')
+    return send_from_directory(os.getcwd(), 'Nu-Skin-Logo.png')
 
 if __name__ == '__main__':
     app.run(debug=True)
