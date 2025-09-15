@@ -1,14 +1,19 @@
 from flask import Flask, render_template_string, send_from_directory
 from datetime import datetime
 import os
+import pytz
 
 app = Flask(__name__)
 
-GO_LIVE_DATE = datetime(2025, 11, 14, 0, 0, 0)
+# Use Mountain Time (Utah, Salt Lake City)
+MT = pytz.timezone('America/Denver')
+
+# Localize Go Live date to Mountain Time
+GO_LIVE_DATE = MT.localize(datetime(2025, 11, 14, 0, 0, 0))
 
 @app.route('/')
 def countdown():
-    now = datetime.now()
+    now = datetime.now(MT)
     delta = GO_LIVE_DATE - now
     days = max(delta.days, 0)
     seconds = max(delta.seconds, 0)
@@ -16,11 +21,11 @@ def countdown():
     minutes = (seconds % 3600) // 60
     secs = seconds % 60
 
-    # Load HTML template from index.html in the root folder
+    # Load HTML template from root folder index.html
     with open('index.html', 'r') as f:
         html_template = f.read()
 
-    # Render template with live values
+    # Render template with countdown values
     return render_template_string(
         html_template,
         days=days,
@@ -29,6 +34,7 @@ def countdown():
         seconds=f"{secs:02d}"
     )
 
+# Serve logo from root folder
 @app.route('/nuskin_logo.png')
 def logo():
     return send_from_directory(os.getcwd(), 'nuskin_logo.png')
