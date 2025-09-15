@@ -12,7 +12,8 @@
         }
         img {
             background-color: transparent;
-            width: 150px;
+            width: 340px;
+            margin-bottom: 12px;
         }
         h1 {
             font-size: 32px;
@@ -32,10 +33,10 @@
     </style>
 </head>
 <body>
-    <img src="/nuskin_logo.png" alt="Nuskin Logo" />
+    <img src="/Nu-Skin-Logo.png" alt="Nu Skin Logo" />
     <h1>India MVP-1 Business Go Live - 14-Nov-2025</h1>
     <div class="timer-label">Day remaining: T-{{ days }}</div>
-    <div class="countdown" id="timer">{{ days }}d {{ hours }}:{{ minutes }}:{{ seconds }}</div>
+    <div class="countdown" id="timer">{{ days }}d {{ hours | string | pad(2, '0') }}:{{ minutes | string | pad(2, '0') }}:{{ seconds | string | pad(2, '0') }}</div>
     <script>
         let daysRemaining = {{ days }};
         let hours = {{ hours }};
@@ -69,11 +70,15 @@
                     }
                 }
             }
+            // Format with leading zeros
+            function pad(num) {
+                return num.toString().padStart(2, '0');
+            }
             document.getElementById('timer').textContent =
                 daysRemaining + "d " +
-                String(hours).padStart(2, '0') + ":" +
-                String(minutes).padStart(2, '0') + ":" +
-                String(seconds).padStart(2, '0');
+                pad(hours) + ":" +
+                pad(minutes) + ":" +
+                pad(seconds);
         }
 
         const timerInterval = setInterval(updateTimer, 1000);
