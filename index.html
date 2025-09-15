@@ -4,10 +4,25 @@
     <meta charset="UTF-8" />
     <title>India MVP-1 Business Go Live Countdown</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        img { width: 150px; }
-        h1 { font-size: 24px; margin-bottom: 10px; }
-        .countdown { font-size: 48px; margin-top: 20px; color: #007ba7; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: white; /* Set to white or transparent as needed */
+        }
+        img {
+            background-color: transparent; /* Ensure logo background is transparent */
+            width: 150px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .countdown {
+            font-size: 48px;
+            margin-top: 20px;
+            color: #007ba7;
+        }
     </style>
 </head>
 <body>
@@ -16,6 +31,7 @@
     <div>Day remaining: T-{{ days }}</div>
     <div class="countdown">{{ hours }}:{{ minutes }}:{{ seconds }}</div>
     <script>
+        // Refresh page every second to update timer
         setTimeout(() => location.reload(), 1000);
     </script>
 </body>
