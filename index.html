@@ -22,31 +22,32 @@
             width: 100vw;
         }
         .logo-section {
-            margin-top: 40px;
+            margin-top: 48px;
         }
         .nuskin-logo {
             background-color: transparent;
-            width: 200px;
-            margin-bottom: 15px;
+            width: 320px;
+            margin-bottom: 25px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 32px;
+            font-weight: bold;
+        }
+        .timeline-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
         }
         .golive-img {
             display: block;
-            margin: 38px auto 28px auto;
-            max-width: 650px;
-            width: 70vw;
-            box-shadow: 0 4px 16px #ddd;
-        }
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 26px;
-            font-weight: bold;
-        }
-        .timer-label {
-            font-size: 2.1rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-            margin-top: 0;
-            letter-spacing: 0.5px;
+            margin: 0 auto;
+            max-width: 900px;
+            width: 80vw;
+            box-shadow: 0 4px 18px #ddd;
+            padding: 8px 0 18px 0;
         }
         .timer-container {
             position: fixed;
@@ -55,17 +56,24 @@
             bottom: 8%;
             text-align: center;
         }
+        .timer-label {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            margin-top: 0;
+            letter-spacing: 0.5px;
+        }
         .countdown {
             font-size: 56px;
             color: #007ba7;
-            font-weight: 600;
+            font-weight: 700;
         }
-        @media (max-width: 900px) {
-            .nuskin-logo { width: 110px;}
-            .golive-img { max-width: 90vw; }
-            .countdown { font-size: 36px; }
-            h1 { font-size: 1.2rem; }
-            .timer-label { font-size: 1.2rem;}
+        @media (max-width: 1000px) {
+            .nuskin-logo { width: 180px;}
+            .golive-img { max-width: 98vw; width: 99vw; }
+            .countdown { font-size: 32px; }
+            h1 { font-size: 1.35rem; }
+            .timer-label { font-size: 1.5rem;}
         }
     </style>
 </head>
@@ -75,7 +83,9 @@
             <img src="/Nu-Skin-Logo.png" alt="Nu Skin Logo" class="nuskin-logo" />
         </div>
         <h1>India MVP-1 Business Go Live - 14-Nov-2025</h1>
-        <img src="/IndiaMVPlive.png" alt="Project Timeline" class="golive-img" />
+        <div class="timeline-section">
+            <img src="/IndiaMVPlive.png" alt="Project Timeline" class="golive-img" />
+        </div>
     </div>
     <div class="timer-container">
         <div class="timer-label">Days Remaining</div>
