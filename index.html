@@ -6,37 +6,76 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: white;
+            margin: 0;
+            padding: 0;
+            background: white;
+            height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
         }
-        img {
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            width: 100vw;
+        }
+        .logo-section {
+            margin-top: 40px;
+        }
+        .nuskin-logo {
             background-color: transparent;
-            width: 340px;
-            margin-bottom: 12px;
+            width: 200px;
+            margin-bottom: 15px;
+        }
+        .golive-img {
+            max-width: 350px;
+            width: 90vw;
+            margin: 30px 0 12px 0;
+            box-shadow: 0 4px 14px #ddd;
         }
         h1 {
-            font-size: 32px;
+            font-size: 2.2rem;
             margin-bottom: 10px;
             font-weight: bold;
-        }
-        .countdown {
-            font-size: 56px;
-            margin-top: 30px;
-            color: #007ba7;
         }
         .timer-label {
             font-size: 22px;
             margin-top: 18px;
             margin-bottom: 8px;
         }
+        .timer-container {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 8%;
+            text-align: center;
+        }
+        .countdown {
+            font-size: 56px;
+            color: #007ba7;
+            font-weight: 600;
+        }
+        @media (max-width: 600px) {
+            .nuskin-logo { width: 110px;}
+            .golive-img { max-width: 90vw; }
+            .countdown { font-size: 32px; }
+        }
     </style>
 </head>
 <body>
-    <img src="/Nu-Skin-Logo.png" alt="Nu Skin Logo" />
-    <h1>India MVP-1 Business Go Live - 14-Nov-2025</h1>
-    <div class="timer-label">Days Remaining: T-{{ days }}</div>
-    <div class="countdown" id="timer">{{ days }}d {{ hours }}:{{ minutes }}:{{ seconds }}</div>
+    <div class="wrapper">
+        <div class="logo-section">
+            <img src="/Nu-Skin-Logo.png" alt="Nu Skin Logo" class="nuskin-logo" />
+        </div>
+        <img src="/IndiaMVPlive.png" alt="Project Timeline" class="golive-img" />
+        <h1>India MVP-1 Business Go Live - 14-Nov-2025</h1>
+        <div class="timer-label">Days Remaining: T-{{ days }}</div>
+    </div>
+    <div class="timer-container">
+        <div class="countdown" id="timer">{{ days }}d {{ hours }}:{{ minutes }}:{{ seconds }}</div>
+    </div>
     <script>
         let daysRemaining = {{ days }};
         let hours = parseInt("{{ hours }}");
@@ -62,7 +101,6 @@
                             minutes = 59;
                             seconds = 59;
                         } else {
-                            // Countdown complete
                             document.getElementById('timer').textContent = "Go Live Complete!";
                             clearInterval(timerInterval);
                             return;
