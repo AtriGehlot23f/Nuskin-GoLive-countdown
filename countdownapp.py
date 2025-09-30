@@ -21,7 +21,6 @@ def countdown():
     minutes = (seconds % 3600) // 60
     secs = seconds % 60
 
-    # Zero pad hours, minutes, and seconds before passing to template
     hours_str = f"{hours:02d}"
     minutes_str = f"{minutes:02d}"
     seconds_str = f"{secs:02d}"
@@ -40,6 +39,10 @@ def countdown():
 @app.route('/Nu-Skin-Logo.png')
 def logo():
     return send_from_directory(os.getcwd(), 'Nu-Skin-Logo.png')
+
+@app.route('/IndiaMVPlive.png')
+def go_live_img():
+    return send_from_directory(os.getcwd(), 'IndiaMVPlive.png')
 
 if __name__ == '__main__':
     app.run(debug=True)
