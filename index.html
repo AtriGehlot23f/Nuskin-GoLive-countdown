@@ -35,19 +35,37 @@
             font-weight: bold;
         }
         .timeline-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 32px;
+            position: relative;
+            width: 80vw;
+            max-width: 900px;
+            margin: 0 auto 32px auto;
+            min-height: 140px;
         }
         .golive-img {
             display: block;
-            margin: 0 auto;
-            max-width: 900px;
-            width: 80vw;
+            width: 100%;
+            height: auto;
             box-shadow: 0 4px 18px #ddd;
-            padding: 8px 0 18px 0;
+            margin: 0;
+        }
+        .marker-arrow {
+            position: absolute;
+            left: 0;
+            top: -42px;
+            width: 80px;
+            pointer-events: none;
+            text-align: center;
+            z-index: 5;
+        }
+        .marker-arrow svg {
+            display: block;
+            margin: 0 auto;
+        }
+        .marker-label {
+            font-size: 1.0rem;
+            font-weight: bold;
+            color: #d12c2c;
+            margin-top: -2px;
         }
         .timer-container {
             position: fixed;
@@ -84,7 +102,8 @@
         </div>
         <h1>India MVP-1 Business Go Live - 14-Nov-2025</h1>
         <div class="timeline-section">
-            <img src="/IndiaMVPlive.png" alt="Project Timeline" class="golive-img" />
+            <div id="marker-container"></div>
+            <img src="/IndiaMVPlive.png" alt="Project Timeline" class="golive-img" id="timeline-img" />
         </div>
     </div>
     <div class="timer-container">
@@ -92,6 +111,39 @@
         <div class="countdown" id="timer">{{ days }}d {{ hours }}:{{ minutes }}:{{ seconds }}</div>
     </div>
     <script>
+        function placeMarker() {
+            const timelineImg = document.getElementById('timeline-img');
+            const markerContainer = document.getElementById('marker-container');
+            // Timeline range from June 1 to Dec 31, 2025
+            const startDate = new Date('2025-06-01T00:00:00');
+            const endDate = new Date('2025-12-31T23:59:59');
+            const now = new Date();
+
+            // Clamp date to timeline range
+            let posDate = now < startDate ? startDate : (now > endDate ? endDate : now);
+
+            // Calculate position percentage
+            const totalMs = endDate.getTime() - startDate.getTime();
+            const elapsedMs = posDate.getTime() - startDate.getTime();
+            const percent = elapsedMs / totalMs;
+
+            const imgWidth = timelineImg.getBoundingClientRect().width;
+            const markerLeft = percent * imgWidth - 40; // Center marker (80px width)
+
+            // Insert marker html
+            markerContainer.innerHTML = `
+                <div class="marker-arrow" style="left: ${markerLeft}px;">
+                    <svg width="24" height="32" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="12,0 24,24 0,24" style="fill:#d12c2c;" />
+                    </svg>
+                    <div class="marker-label">we are here</div>
+                </div>
+            `;
+        }
+
+        window.addEventListener('DOMContentLoaded', placeMarker);
+        window.addEventListener('resize', placeMarker);
+
         let daysRemaining = {{ days }};
         let hours = parseInt("{{ hours }}");
         let minutes = parseInt("{{ minutes }}");
